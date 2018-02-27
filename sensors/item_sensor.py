@@ -42,9 +42,11 @@ class ItemSensor(PollingSensor):
 
     def poll(self):
         stored_date = self._get_last_date()
-        self._logger.info("Stored date is {0} and now is {1}".format(stored_date, datetime.now()))
+        
         if not stored_date:
             stored_date = datetime.now() - timedelta(minutes=10)
+        self._logger.info("Stored date is {0} and now is {1}".format(stored_date, datetime.now()))
+
         start_date = self._timezone.localize(EWSDateTime.from_datetime(stored_date))
         target = self.account.root.get_folder_by_name(self.sensor_folder)
         items = target.filter(is_read=False).filter(datetime_received__gt=start_date)
