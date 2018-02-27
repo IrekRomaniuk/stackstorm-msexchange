@@ -1,0 +1,13 @@
+---
+    name: "new_item_rule"
+    pack: "msexchange"
+    description: "Sample rule dumping trigger payload to a file."
+    enabled: true
+
+    trigger:
+        type: "msexchange.exchange_new_item"
+
+    action:
+        ref: "core.local"
+        parameters:
+            cmd: "echo \"{{trigger.payload}}\" >> ~/st2.exchange_new_item.out"
