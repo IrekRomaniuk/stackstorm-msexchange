@@ -49,7 +49,7 @@ class ItemSensor(PollingSensor):
         target = self.account.root.get_folder_by_name(self.sensor_folder)
         items = target.filter(is_read=False).filter(datetime_received__gt=start_date)
 
-        self._logger.info("Found {0} items in {2}}".format(items.count(), target))
+        self._logger.info("Found {0} items in {1}}".format(items.count(), target))
         for payload in items.values('item_id', 'subject', 'body', 'datetime_received'):
             self._logger.info("Sending trigger for item '{0}'.".format(payload['subject']))
             self._sensor_service.dispatch(trigger='exchange_new_item', payload=payload)
