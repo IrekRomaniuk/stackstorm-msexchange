@@ -11,6 +11,4 @@ trigger_types:
       type: "object"
       properties:          
           subject:
-            type: "string"
-          body:
-            type: "string"         
+            type: "string"                   
