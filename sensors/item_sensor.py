@@ -52,14 +52,16 @@ class ItemSensor(PollingSensor):
         items = target.filter(is_read=False).filter(datetime_received__gt=start_date)
         
         self._logger.info("Found {0} items in {1}".format(items.count(), target))
+        self._logger.info("Here it is:\n{0}".format(items))
         """
         if items.count() == 0:
             self._set_last_date(start_date)
-        """    
+           
         for payload in items.values('item_id', 'subject', 'body', 'datetime_received'):
             self._logger.info("Sending trigger for item '{0}'.".format(payload['subject']))
             self._sensor_service.dispatch(trigger='exchange_new_item', payload=payload)
             self._set_last_date(payload['datetime_received'])
+        """    
 
     def cleanup(self):
         # This is called when the st2 system goes down. You can perform cleanup operations like
