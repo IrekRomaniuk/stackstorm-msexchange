@@ -53,7 +53,7 @@ class ItemSensor(PollingSensor):
         
         self._logger.info("Found {0} items in {1}".format(items.count(), target))        
         if items.count() > 0:            
-           self._logger.info("Here it is:\nItems of type {0}:\n{1}".format(type(items), items))
+           self._logger.info("Here it is:\nItems of type {0}:\n{1}".format(type(items), items.all()))
            """
            for payload in items.values('item_id', 'subject', 'body', 'datetime_received'):
               self._logger.info("Sending trigger for item '{0}'.".format(payload['subject']))
