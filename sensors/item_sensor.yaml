@@ -13,6 +13,4 @@ trigger_types:
           subject:
             type: "string"
           body:
-            type: "string"
-          datetime_received:
-            type: "string"
+            type: "string"         
