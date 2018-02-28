@@ -44,7 +44,7 @@ class ItemSensor(PollingSensor):
         stored_date = self._get_last_date()
         
         if not stored_date:
-            stored_date = datetime.now() - timedelta(minutes=1)
+           stored_date = datetime.now() - timedelta(minutes=1)
         self._logger.info("Stored date is {0} and now is {1}".format(stored_date, datetime.now()))
 
         start_date = self._timezone.localize(EWSDateTime.from_datetime(stored_date))
@@ -54,12 +54,12 @@ class ItemSensor(PollingSensor):
         self._logger.info("Found {0} items in {1}".format(items.count(), target))        
         if items.count() > 0:            
            self._logger.info("Here it is {0}".format(items.values()))
-           """
+           
            for payload in items.values('item_id', 'subject', 'body', 'datetime_received'):
-               self._logger.info("Sending trigger for item '{0}'.".format(payload['subject']))
-               self._sensor_service.dispatch(trigger='exchange_new_item', payload=payload)
-               # self._set_last_date(payload['datetime_received'])
-           """
+              self._logger.info("Sending trigger for item '{0}'.".format(payload['subject']))
+              self._sensor_service.dispatch(trigger='exchange_new_item', payload=payload)
+              # self._set_last_date(payload['datetime_received'])
+           
 
     def cleanup(self):
         # This is called when the st2 system goes down. You can perform cleanup operations like
