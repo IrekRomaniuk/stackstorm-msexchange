@@ -44,7 +44,7 @@ class ItemSensor(PollingSensor):
         stored_date = self._get_last_date()
         
         if not stored_date:
-            stored_date = datetime.now() - timedelta(minutes=10)
+            stored_date = datetime.now() - timedelta(minutes=1)
         self._logger.info("Stored date is {0} and now is {1}".format(stored_date, datetime.now()))
 
         start_date = self._timezone.localize(EWSDateTime.from_datetime(stored_date))
