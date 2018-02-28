@@ -55,7 +55,7 @@ class ItemSensor(PollingSensor):
         if items.count() > 0:            
            self._logger.info("Here it is:\nItems of type {0}:\n{1}".format(type(items), items.all()))
            
-           for payload in items.values('subject'): # 'item_id', 'body', 'datetime_received'
+           for payload in items.values('subject', 'item_id', 'body', 'datetime_received'): # , 'item_id', 'body', 'datetime_received'
               self._logger.info("Sending trigger for item '{0}'.".format(payload['subject']))
               self._sensor_service.dispatch(trigger='exchange_new_item', payload=payload)
               # self._set_last_date(payload['datetime_received'])
